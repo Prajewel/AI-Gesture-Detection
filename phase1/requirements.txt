@@ -1,0 +1,10 @@
+opencv-python
+mediapipe
+numpy
+pyttsx3
+#pip install -r requirements.txt
+#py -3.9 -m pip --version
+#py -3.9 -m pip install mediapipe opencv-python numpy pyttsx3
+#py -3.9 -m venv mediapipe-env
+#mediapipe-env\Scripts\activate
+#pip install mediapipe opencv-python numpy pyttsx3
