@@ -11,7 +11,7 @@ class BulletproofTTSEngine:
     """
     
     def __init__(self, rate=180, volume=0.9):
-        print("🚀 Initializing Bulletproof TTS Engine...")
+        print("Initializing Bulletproof TTS Engine...")
         
         self.speech_queue = queue.Queue()
         self.is_running = True
@@ -20,13 +20,13 @@ class BulletproofTTSEngine:
         
         # Platform detection for fallbacks
         self.system = platform.system()
-        print(f"🔧 Detected OS: {self.system}")
+        print(f"Detected OS: {self.system}")
         
         # Start the speech processor thread
         self.processor_thread = threading.Thread(target=self._speech_processor, daemon=True)
         self.processor_thread.start()
         
-        print("✅ Bulletproof TTS Engine Ready - Fresh instance per speech")
+        print("Bulletproof TTS Engine Ready - Fresh instance per speech")
 
     def _create_tts_engine(self):
         """Create a brand new TTS engine instance"""
@@ -39,34 +39,34 @@ class BulletproofTTSEngine:
             voices = engine.getProperty('voices')
             if voices:
                 engine.setProperty('voice', voices[0].id)
-                print(f"🔊 Created TTS engine with voice: {voices[0].name}")
+                print(f"Created TTS engine with voice: {voices[0].name}")
             
             return engine
         except Exception as e:
-            print(f"❌ Failed to create TTS engine: {e}")
+            print(f"Failed to create TTS engine: {e}")
             return None
 
     def _speak_with_fresh_engine(self, text):
         """Speak text using a completely new engine instance"""
-        print(f"🎯 SPEAK ATTEMPT: '{text}'")
+        print(f"SPEAK ATTEMPT: '{text}'")
         
         engine = None
         try:
             # Create FRESH engine instance
             engine = self._create_tts_engine()
             if not engine:
-                print(f"❌ Could not create TTS engine for: '{text}'")
+                print(f"Could not create TTS engine for: '{text}'")
                 return False
             
             # Perform speech
-            print(f"🔊 START Speaking: '{text}'")
+            print(f"START Speaking: '{text}'")
             engine.say(text)
             engine.runAndWait()
-            print(f"✅ FINISHED Speaking: '{text}'")
+            print(f"FINISHED Speaking: '{text}'")
             return True
             
         except Exception as e:
-            print(f"❌ Speech failed for '{text}': {e}")
+            print(f"Speech failed for '{text}': {e}")
             return False
             
         finally:
@@ -81,7 +81,7 @@ class BulletproofTTSEngine:
 
     def _speech_processor(self):
         """Main speech processing loop - runs in background thread"""
-        print("🎯 Speech processor thread started")
+        print("Speech processor thread started")
         
         while self.is_running:
             try:
@@ -97,7 +97,7 @@ class BulletproofTTSEngine:
                 time_since_last = current_time - self.last_speech_time
                 
                 if time_since_last < self.min_interval:
-                    print(f"⏳ Too soon since last speech ({time_since_last:.1f}s), skipping: '{text}'")
+                    print(f"Too soon since last speech ({time_since_last:.1f}s), skipping: '{text}'")
                     self.speech_queue.task_done()
                     continue
                 
@@ -107,16 +107,16 @@ class BulletproofTTSEngine:
                 if success:
                     self.last_speech_time = time.time()
                 else:
-                    print(f"🚨 Speech failed completely for: '{text}'")
+                    print(f"Speech failed completely for: '{text}'")
                 
                 self.speech_queue.task_done()
-                print(f"📊 Queue remaining: {self.speech_queue.qsize()}")
+                print(f"Queue remaining: {self.speech_queue.qsize()}")
                 
             except queue.Empty:
                 # No speech requests, continue waiting
                 continue
             except Exception as e:
-                print(f"🚨 Speech processor error: {e}")
+                print(f"Speech processor error: {e}")
                 try:
                     self.speech_queue.task_done()
                 except:
@@ -127,14 +127,14 @@ class BulletproofTTSEngine:
         if not text or not text.strip():
             return
             
-        print(f"📨 QUEUING Speech: '{text}'")
-        print(f"📊 Queue size before: {self.speech_queue.qsize()}")
+        print(f"QUEUING Speech: '{text}'")
+        print(f"Queue size before: {self.speech_queue.qsize()}")
         
         self.speech_queue.put(text)
         
         # If queue is getting too big, clear old requests
         if self.speech_queue.qsize() > 3:
-            print("⚠️  Queue too large, clearing old requests...")
+            print("Queue too large, clearing old requests...")
             try:
                 # Keep only the most recent request
                 while self.speech_queue.qsize() > 1:
@@ -145,7 +145,7 @@ class BulletproofTTSEngine:
 
     def stop(self):
         """Clean shutdown"""
-        print("🛑 Stopping Bulletproof TTS Engine...")
+        print("Stopping Bulletproof TTS Engine...")
         self.is_running = False
         
         # Clear any pending speech requests
@@ -156,4 +156,4 @@ class BulletproofTTSEngine:
         except:
             pass
         
-        print("✅ Bulletproof TTS Engine Stopped")
+        print("Bulletproof TTS Engine Stopped")

@@ -17,16 +17,16 @@ GESTURE_TO_TEXT = {
 
 # Additional mapping for display purposes only
 GESTURE_DISPLAY_NAMES = {
-    "OPEN_HAND": "Open Hand 👋",
-    "FIST": "Fist ✊", 
-    "THUMBS_UP": "Thumbs Up 👍",
-    "POINT": "Pointing 👆",
-    "VICTORY": "Victory ✌️",
-    "THREE": "Three Fingers 👌",
-    "AWESOME": "Awesome 🤘",
-    "FOUR": "Four Fingers 🖐️",
-    "LOVE_YOU": "I Love you 🤟",
-    "PINKY_UP": "Pinky Up 🖖",
-    "SHAKA": "Shaka Sign 🤙",
-    "UNKNOWN": "Unknown Gesture ❓"
+    "OPEN_HAND": "Open Hand",
+    "FIST": "Fist", 
+    "THUMBS_UP": "Thumbs Up",
+    "POINT": "Pointing",
+    "VICTORY": "Victory",
+    "THREE": "Three Fingers",
+    "AWESOME": "Awesome",
+    "FOUR": "Four Fingers",
+    "LOVE_YOU": "I Love you",
+    "PINKY_UP": "Pinky Up",
+    "SHAKA": "Shaka Sign",
+    "UNKNOWN": "Unknown Gesture"
 }

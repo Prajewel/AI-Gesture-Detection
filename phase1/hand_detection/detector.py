@@ -23,7 +23,7 @@ class HandDetector:
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         
         # To improve performance, mark the image as not writeable to pass by reference
-        rgb.flags.writeable = False
+        #rgb.flags.writeable = False
         results = self.hands.process(rgb)
         rgb.flags.writeable = True
         
